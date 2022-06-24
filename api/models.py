@@ -14,7 +14,7 @@ class User(AbstractUser):
 
 class Post(models.Model):
     # language_id = models.ForeignKey(Language, on_delete=models.CASCADE, related_name='posts', blank=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts', blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts', blank=True)
     name = models.CharField(max_length=256)
     description = models.TextField(default='Needs description', blank=True, null=True)
     img_url = models.URLField(max_length=512, blank=True, null=True)
@@ -26,8 +26,8 @@ class Post(models.Model):
 
 class Comment(models.Model):
     # language_id = models.ForeignKey(Language, on_delete=models.CASCADE, related_name='comments', blank=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', blank=True)
-    post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', blank=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', blank=True)
     title = models.CharField(max_length=200)
     description = models.TextField(default='Needs description', blank=True, null=True)
     date_created = models.DateTimeField(auto_now=True, null=True, blank=True)
