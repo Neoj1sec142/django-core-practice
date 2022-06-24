@@ -1,14 +1,14 @@
 from rest_framework import serializers
-from .models import Language, Post, Comment, User
+from .models import Post, Comment, User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-class LanguageSerializer(serializers.ModelSerializer):
-    class Meta:
-        models = Language
-        fields = '__all__'
+# class LanguageSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         models = Language
+#         fields = '__all__'
     
 class UserSerializer(serializers.ModelSerializer):
-    languages = LanguageSerializer(many=True, read_only=True)
+    # languages = LanguageSerializer(many=True, read_only=True)
 
   # NEW AS OF AUTH SETUP
     email = serializers.EmailField(required=True)
@@ -21,7 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id','email','first_name','last_name','username','password','profile_img']
+        fields = ['id','email','first_name','last_name','username','password','prof_img']
         ## OLD 
         # fields = [field.name for field in model._meta.fields]
         fields.append('languages')
@@ -38,21 +38,26 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 class PostSerializer(serializers.ModelSerializer):
-    language = LanguageSerializer(
-        many=True,
-        read_only=True
-    )
+    users = UserSerializer(many=False, read_only=True)
+    # languages = LanguageSerializer(many=True, read_only=True)
     class Meta:
         model = Post
         fields = '__all__'
-        extra_fields = ('language')
+        extra_fields = ('users')
 
 class CommentSerializer(serializers.ModelSerializer):
-    post = PostSerializer(
-        many=True,
-        read_only=True 
-    )
+    posts = PostSerializer(many=False, read_only=True)
+    users = UserSerializer(many=False, read_only=True)
     class Meta: 
         model = Comment
         fields = '__all__'
-        extra_fields = ('post')
+        extra_fields = ('posts', 'users')
+
+class UserAllDetailsSerializer(serializers.ModelSerializer):
+    # languages = LanguageSerializer(many=True, read_only=True)
+    posts = PostSerializer(many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    class Meta:
+        model = User
+        fields = "__all__"
+        extra_fields = ('posts', 'comments')

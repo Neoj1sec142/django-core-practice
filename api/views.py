@@ -1,18 +1,67 @@
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from rest_framework_simplejwt.tokens import RefreshToken
 from django.shortcuts import render
-from .models import Language, Post, Comment
-from .serializers import LanguageSerializer, PostSerializer, CommentSerializer
+from .models import Post, Comment, User
+from .serializers import PostSerializer, CommentSerializer, UserSerializer, UserAllDetailsSerializer
 # Create your views here.
-class LanguageList(generics.ListCreateAPIView):
-    queryset = Language.objects.all()
-    serializer_class = LanguageSerializer
+class UserList(APIView):
+  permission_classes = (permissions.AllowAny)
+  authentication_classes = ()
 
-class LanguageDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Language.objects.all()
-    serializer_class = LanguageSerializer
+  def get(self, request):
+    users = User.objects.all()
+    return Response(users)
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserDetailByUsername(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = 'username'
+
+class UserCreate(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+    def post(self, request, format='json'):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            if user:
+                json = serializer.data
+                return Response(json, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserLogout(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+    def post(self, request):
+        
+        refresh_token = request.data['refresh_token']
+        token = RefreshToken(refresh_token)
+        token.blacklist()
+        return Response(status=status.HTTP_205_RESET_CONTENT)
+
+class UserAllDetailsList(generics.ListCreateAPIView):
+  queryset = User.objects.all()
+  serializer_class = UserAllDetailsSerializer
+
+class UserAllDetailsDetail(generics.RetrieveUpdateDestroyAPIView):
+  queryset = User.objects.all()
+  serializer_class = UserAllDetailsSerializer
+
+# class LanguageList(generics.ListCreateAPIView):
+#     queryset = Language.objects.all()
+#     serializer_class = LanguageSerializer
+
+# class LanguageDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Language.objects.all()
+#     serializer_class = LanguageSerializer
 
 class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
