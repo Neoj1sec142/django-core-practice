@@ -3,6 +3,11 @@ import { Route, Routes } from 'react-router-dom'
 import LoginContext from './LoginContext'
 import Client from './services/Axios'
 import './styles/App.css';
+// Login / Register Imports
+import Login from './components/Login'
+import Register from './components/Register'
+import Logout from './components/Logout'
+import Home from './pages/Home'
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false)
@@ -39,10 +44,10 @@ const App = () => {
         
       </header>
       <Routes>
-        {/* <Route path='/' element={<Land loginStatus={loginStatus}/>}/> */}
-        {/* <Route path='/register' element={ <Register loginStatus={loginStatus}/> } /> */}
-        {/* <Route path='/login' element={ <Login loginStatus={loginStatus}/> } /> */}
-        {/* <Route path='/logout' element={ <Logout /> } /> */}
+        <Route path='/' element={<Home loginStatus={loginStatus}/>}/>
+        <Route path='/register' element={ <Register loginStatus={loginStatus}/> } />
+        <Route path='/login' element={ <Login loginStatus={loginStatus}/> } />
+        <Route path='/logout' element={ <Logout /> } />
       </Routes>
       </LoginContext.Provider>
     </div>
