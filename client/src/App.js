@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react'
+import { Route, Routes } from 'react-router-dom'
+import LoginContext from './LoginContext'
+import './styles/App.css';
 
 function App() {
   return (
     <div className="App">
+      <LoginContext.Provider value={{loginStatus, setLoginStatus, user, setUser}}>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
       </header>
+      <Routes>
+        {/* <Route path='/' element={<Land loginStatus={loginStatus}/>}/> */}
+        {/* <Route path='/register' element={ <Register loginStatus={loginStatus}/> } /> */}
+        {/* <Route path='/login' element={ <Login loginStatus={loginStatus}/> } /> */}
+        {/* <Route path='/logout' element={ <Logout /> } /> */}
+      </Routes>
+      </LoginContext.Provider>
     </div>
   );
 }
