@@ -9,7 +9,6 @@ class LanguageSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     language = LanguageSerializer(
-        view_name='post_detail',
         many=True,
         read_only=True
     )
@@ -20,7 +19,6 @@ class PostSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     post = PostSerializer(
-        view_name='comment_detail',
         many=True,
         read_only=True 
     )
