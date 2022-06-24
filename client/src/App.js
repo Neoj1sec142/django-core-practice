@@ -8,6 +8,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Logout from './components/Logout'
 import Home from './pages/Home'
+import NavDrop from './components/Nav';
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false)
@@ -41,7 +42,7 @@ const App = () => {
     <div className="App">
       <LoginContext.Provider value={{loginStatus, setLoginStatus, user, setUser}}>
       <header className="App-header">
-        
+      <NavDrop loginStatus={loginStatus} user={user}/>
       </header>
       <Routes>
         <Route path='/' element={<Home loginStatus={loginStatus}/>}/>
