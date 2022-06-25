@@ -50,9 +50,7 @@ const App = () => {
       <NavDrop loginStatus={loginStatus} user={user}/>
       </header>
       <Routes>
-        {loginStatus
-        ? <Route path='/' element={<Todo loginStatus={loginStatus}/>}/>
-        : <Route path='/' element={<Home loginStatus={loginStatus}/>}/>}
+        <Route path='/' element={<Home loginStatus={loginStatus}/>}/>
         <Route path='/register' element={ <Register loginStatus={loginStatus}/> } />
         <Route path='/login' element={ <Login loginStatus={loginStatus}/> } />
         <Route path='/logout' element={ <Logout /> } />
