@@ -11,14 +11,15 @@ const NavDrop = ({ loginStatus, user }) => {
   if (loginStatus) {
     authenticatedOptions = (
   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{justifyContent: 'space-evenly'}}>
-  <Navbar.Brand onClick={() => navigate('/home')}>Dashboard In</Navbar.Brand>
+  <Navbar.Brand onClick={() => navigate('/')}>Dashboard In</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav" style={{justifyContent: 'space-between'}}>
         <Nav className="mr-auto" >
           <Nav.Link href='/'>Home</Nav.Link>
-          {/* <Nav.Link href="/projects">Projects</Nav.Link>
-          <Nav.Link href={`/profile/${user}`}>Profile</Nav.Link>
-          <Nav.Link href="/collab">Collaborations</Nav.Link> */}
+          <Nav.Link href="/ref">References</Nav.Link>
+          <Nav.Link href='time'>Timer</Nav.Link>
+          <Nav.Link href="/todo">Todo</Nav.Link>
+          <Nav.Link href="/sand">Sandbox</Nav.Link>
           {/* <Nav.Link href={`/profile/${user.id}`}>Profile</Nav.Link> */}
           {/* <NavDropdown title="Toolbelt" id="collasible-nav-dropdown" >
             <NavDropdown.Item id='d-item' href="/python">~ Python / Django ~</NavDropdown.Item>

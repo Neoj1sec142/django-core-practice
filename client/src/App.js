@@ -9,6 +9,11 @@ import Register from './components/Register'
 import Logout from './components/Logout'
 import Home from './pages/Home'
 import NavDrop from './components/Nav';
+// Page Imports
+import Sandbox from './pages/Sandbox'
+import Ref from './pages/Ref'
+import Timer from './pages/Timer'
+import Todo from './pages/Todo'
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false)
@@ -45,10 +50,16 @@ const App = () => {
       <NavDrop loginStatus={loginStatus} user={user}/>
       </header>
       <Routes>
-        <Route path='/' element={<Home loginStatus={loginStatus}/>}/>
+        {loginStatus
+        ? <Route path='/' element={<Todo loginStatus={loginStatus}/>}/>
+        : <Route path='/' element={<Home loginStatus={loginStatus}/>}/>}
         <Route path='/register' element={ <Register loginStatus={loginStatus}/> } />
         <Route path='/login' element={ <Login loginStatus={loginStatus}/> } />
         <Route path='/logout' element={ <Logout /> } />
+        <Route path='/ref' element={ <Ref loginStatus={loginStatus}/> } />
+        <Route path='/time' element={ <Timer loginStatus={loginStatus}/> } />
+        <Route path='/todo' element={ <Todo loginStatus={loginStatus}/> } />
+        <Route path='/sand' element={ <Sandbox loginStatus={loginStatus}/> } />
       </Routes>
       </LoginContext.Provider>
     </div>
