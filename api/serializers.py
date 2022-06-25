@@ -24,7 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id','email','first_name','last_name','username','password','prof_img']
         ## OLD 
         # fields = [field.name for field in model._meta.fields]
-        fields.append('languages')
+        # fields.append('languages')
 
         ## NEW AS OF AUTH SETUP
         extra_kwargs = {'write_only': True}
