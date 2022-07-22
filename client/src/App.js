@@ -14,6 +14,7 @@ import Sandbox from './pages/Sandbox'
 import Ref from './pages/Ref'
 import Timer from './pages/Timer'
 import Todo from './pages/Todo'
+import Notes from './pages/Notes'
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false)
@@ -58,6 +59,7 @@ const App = () => {
         <Route path='/time' element={ <Timer loginStatus={loginStatus}/> } />
         <Route path='/todo' element={ <Todo loginStatus={loginStatus}/> } />
         <Route path='/sand' element={ <Sandbox loginStatus={loginStatus}/> } />
+        <Route path='/notes' element={ <Notes loginStatus={loginStatus}/> } />
       </Routes>
       </LoginContext.Provider>
     </div>

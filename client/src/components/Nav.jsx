@@ -20,6 +20,7 @@ const NavDrop = ({ loginStatus, user }) => {
           <Nav.Link href='time'>Timer</Nav.Link>
           <Nav.Link href="/todo">Todo</Nav.Link>
           <Nav.Link href="/sand">Sandbox</Nav.Link>
+          <Nav.Link href="/notes">Notes</Nav.Link>
           {/* <Nav.Link href={`/profile/${user.id}`}>Profile</Nav.Link> */}
           {/* <NavDropdown title="Toolbelt" id="collasible-nav-dropdown" >
             <NavDropdown.Item id='d-item' href="/python">~ Python / Django ~</NavDropdown.Item>

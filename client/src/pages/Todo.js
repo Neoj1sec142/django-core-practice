@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { LoadPosts, UpdateNewPostState, UploadPost } from '../store/actions/PostActions'
 import CreateTo from '../components/CreateTo'
 
+
 const mapStateToProps = ({postState, commState}) => {
     return{postState, commState}
 }

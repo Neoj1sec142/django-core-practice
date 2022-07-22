@@ -44,6 +44,7 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
         extra_fields = ('users')
+    
 
 class CommentSerializer(serializers.ModelSerializer):
     posts = PostSerializer(many=False, read_only=True)
