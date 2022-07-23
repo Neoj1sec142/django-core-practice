@@ -44,6 +44,11 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
         extra_fields = ('users')
+    # def create(self, validated_data):
+    #     instance = self.Meta.model(**validated_data)
+    #     if instance.is_valid():
+    #         instance.save()
+    #         return instance
     
 
 class CommentSerializer(serializers.ModelSerializer):

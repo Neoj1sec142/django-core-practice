@@ -28,7 +28,7 @@ export const CreatePost = async (newPost) => {
             user_id: newPost.user_id
         }
         console.log(data, "Before axios")
-        await Client.post(`posts/`, data)
+        await Client.post(`posts`, data)
         .then((res) => console.log(res, "successfully projected"))
         .catch((err) => console.log(err))
     } catch (err) {
@@ -45,3 +45,5 @@ export const RemovePost = async (id) => {
         throw err
     }
 }
+
+

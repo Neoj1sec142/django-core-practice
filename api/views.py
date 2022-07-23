@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.shortcuts import render
+import json
 from .models import Post, Comment, User
 from .serializers import PostSerializer, CommentSerializer, UserSerializer, UserAllDetailsSerializer
 # Create your views here.
@@ -63,9 +64,13 @@ class UserAllDetailsDetail(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Language.objects.all()
 #     serializer_class = LanguageSerializer
 
-class PostList(generics.ListCreateAPIView):
+class PostList(APIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=json):
+        return Response("ok")
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
