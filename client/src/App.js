@@ -16,6 +16,7 @@ import Timer from './pages/Timer'
 import Todo from './pages/Todo'
 import NotesDash from './pages/NotesDash'
 import NoteStyle from './components/NotesStyle';
+import CreateTo from './components/CreateTo';
 
 const App = () => {
   const [loginStatus, setLoginStatus] = useState(false)
@@ -58,7 +59,8 @@ const App = () => {
         <Route path='/logout' element={ <Logout /> } />
         <Route path='/ref' element={ <Ref loginStatus={loginStatus}/> } />
         <Route path='/time' element={ <Timer loginStatus={loginStatus}/> } />
-        <Route path='/todo' element={ <Todo loginStatus={loginStatus}/> } />
+        <Route path='/create' element={ <CreateTo loginStatus={loginStatus}/> } />
+        <Route path='/todo' element={ <Todo loginStatus={loginStatus} user={user}/> } />
         <Route path='/sand' element={ <Sandbox loginStatus={loginStatus}/> } />
         <Route path='/notes' element={ <NotesDash loginStatus={loginStatus}/> } />
         <Route path='/notes/:style' element={ <NoteStyle loginStatus={loginStatus}/> } />

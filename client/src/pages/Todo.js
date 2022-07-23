@@ -22,7 +22,7 @@ import { GetPosts } from '../services/PostServices'
 // user, name, description, img_url, priority, date_created, date_modified
 
 
-const Todo = () => {
+const Todo = (props) => {
     const [create, setCreate] = useState(false)
     const [posts, setPosts] = useState ([])
     const handleCre = (e) => {
@@ -30,11 +30,11 @@ const Todo = () => {
             setCreate(true)
         }
     }
-    useEffect(() => {
-        const data = GetPosts()
-        setPosts(data)
-    },[])
-    console.log(posts, "POSTS")
+    // useEffect(() => {
+    //     const data = GetPosts()
+    //     setPosts(data)
+    // },[])
+    console.log(props, "POSTS")
     if(!create){
         return(
             <Container fluid>
@@ -51,7 +51,7 @@ const Todo = () => {
             //</Form.Group>
         )
     }else if(create){
-        return(<CreateTo />)
+        return(<CreateTo user={props.user}/>)
         
     }else{
         return(

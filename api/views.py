@@ -63,15 +63,23 @@ class UserAllDetailsDetail(generics.RetrieveUpdateDestroyAPIView):
 # class LanguageDetail(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Language.objects.all()
 #     serializer_class = LanguageSerializer
-
 class PostList(APIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (permissions.AllowAny,)
 
+
+class PostListNew(generics.CreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    # permission_classes = (permissions.AllowAny,)
+
     def post(self, request, format=json):
         if request.method == "POST":
-            serializer = PostSerializer(data=request.data)
+            new_data = request.data
+            user = User.objects.get(id=request.data['user_id'])
+            new_data['user_id']=user
+            serializer = PostSerializer(data=new_data)
             if serializer.is_valid():
                 post = serializer.save()
                 if post:
@@ -79,10 +87,10 @@ class PostList(APIView):
                 return Response(snp, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request, format=json):
-        if request.method == "GET":
-            queryset = Post.objects.all()
-            return Response(queryset)
+    # def get(self, request, format=json):
+    #     if request.method == "GET":
+    #         queryset = Post.objects.all()
+    #         return Response(queryset)
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()

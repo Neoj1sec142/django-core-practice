@@ -38,7 +38,7 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 class PostSerializer(serializers.ModelSerializer):
-    users = UserSerializer(many=False, read_only=True)
+    users = UserSerializer(many=False, read_only=True, source='user_id')
     # languages = LanguageSerializer(many=True, read_only=True)
     class Meta:
         model = Post
