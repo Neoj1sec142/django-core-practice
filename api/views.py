@@ -70,7 +70,19 @@ class PostList(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request, format=json):
-        return Response("ok")
+        if request.method == "POST":
+            serializer = PostSerializer(data=request.data)
+            if serializer.is_valid():
+                post = serializer.save()
+                if post:
+                    snp = serializer.data
+                return Response(snp, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, format=json):
+        if request.method == "GET":
+            queryset = Post.objects.all()
+            return Response(queryset)
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()

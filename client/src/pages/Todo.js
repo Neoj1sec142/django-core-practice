@@ -4,6 +4,7 @@ import CardHeader from 'react-bootstrap/esm/CardHeader'
 import { useEffect, useState } from 'react'
 // import { LoadPosts, UpdateNewPostState, UploadPost } from '../store/actions/PostActions'
 import CreateTo from '../components/CreateTo'
+import { GetPosts } from '../services/PostServices'
 
 
 // const mapStateToProps = ({postState, commState}) => {
@@ -18,27 +19,22 @@ import CreateTo from '../components/CreateTo'
 //     }
 // }
 
-// class Post(models.Model):
-//     # language_id = models.ForeignKey(Language, on_delete=models.CASCADE, related_name='posts', blank=True)
-//     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts', blank=True)
-//     name = models.CharField(max_length=256)
-//     description = models.TextField(default='Needs description', blank=True, null=True)
-//     img_url = models.URLField(max_length=512, blank=True, null=True)
-//     priority = models.SmallIntegerField()
-//     date_created = models.DateTimeField(auto_now=True, null=True, blank=True)
-//     date_modified = models.DateTimeField(auto_now=True, null=True, blank=True)
-//     def __str__(self):
-//         return self.name
+// user, name, description, img_url, priority, date_created, date_modified
+
 
 const Todo = () => {
     const [create, setCreate] = useState(false)
-    
+    const [posts, setPosts] = useState ([])
     const handleCre = (e) => {
         if(create === false){
             setCreate(true)
         }
     }
-    
+    useEffect(() => {
+        const data = GetPosts()
+        setPosts(data)
+    },[])
+    console.log(posts, "POSTS")
     if(!create){
         return(
             <Container fluid>

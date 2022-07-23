@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card, Form, Button} from 'react-bootstrap'
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 // import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
 import {CreatePost} from '../services/PostServices.js'
@@ -19,7 +19,7 @@ import {CreatePost} from '../services/PostServices.js'
 // }
 
 const CreateTo = (props) => {
-    const params = useParams()
+    const n = useNavigate()
     const [newPost, setNewPost] = useState({
         name: '',
         description: '',
@@ -27,13 +27,14 @@ const CreateTo = (props) => {
         priority: 0
     })
     const handleChange = (e) => {
-        setNewPost({[e.target.name]: e.target.value})
+        setNewPost({...newPost, [e.target.name]: e.target.value})
         // console.log(props.postState.newPost)
     }
     // console.log(props, "Props")
     const handleSubmit = async (e) => {
         e.preventDefault()
         await CreatePost(newPost)
+        n('/todo')
     }
 
     
@@ -41,19 +42,12 @@ const CreateTo = (props) => {
         <Card>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicTitle">
-                    <Form.Label>Title of Merch:</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Title Here" name='name' onChange={handleChange} value={newPost.name} required={true}/>
+                    <Form.Label>Name of Post:</Form.Label>
+                    <Form.Control type="text" placeholder="Enter Name Here" name='name' onChange={handleChange} value={newPost.name} required={true}/>
                     <Form.Text className="text-muted">
                         This will be displayed with the image so make sure its typed right.
                     </Form.Text>
                 </Form.Group>
-                {/* <Form.Group className="mb-3" controlId="formBasicImg" onChange={handleChange}>
-                    <Form.Label>Add an Image:</Form.Label>
-                    <Form.Control type="url" placeholder="URL for Image Here" name='image' value={ap.image} required={true}/>
-                    <Form.Text className="text-muted">
-                        Make sure the URL isnt to long or it wont be accepted as a post. (250 ch)
-                    </Form.Text>
-                </Form.Group> */}
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Description:</Form.Label>
                     <Form.Control type="text" placeholder="Description Here" name='description' onChange={handleChange} value={newPost.description} required={true}/>
