@@ -33,6 +33,7 @@ const CreateTo = (props) => {
         // console.log(props.postState.newPost)
     }
     // console.log(props, "Props")
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         if(props.user){
@@ -42,6 +43,7 @@ const CreateTo = (props) => {
             alert("User is Undefined")
         }
     }
+    
 
     console.log(props, "Params")
     return(

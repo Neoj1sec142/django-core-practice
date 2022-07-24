@@ -1,4 +1,4 @@
-import {Card, Container, Row, Button} from 'react-bootstrap'
+import {Card, Container, Row, Col, Button} from 'react-bootstrap'
 import CardHeader from 'react-bootstrap/esm/CardHeader'
 // import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
@@ -31,8 +31,12 @@ const Todo = (props) => {
         }
     }
     useEffect(() => {
-        const data = GetPosts()
+        const fetchData = async () => {
+        const data = await GetPosts()
         setPosts(data)
+        }
+        fetchData()
+        .catch(err => console.error(err, 'ERR TODO'))
     },[])
     console.log(posts, "POSTS")
     if(!create){
@@ -42,10 +46,20 @@ const Todo = (props) => {
                 <CardHeader>
                     <Button onClick={(e) => handleCre(e)}>Add To List</Button>
                 </CardHeader>
-                {/* {posts.map((post) => ( 
-                 <Row>Posts</Row>
-                 
-                ))} */}
+                {posts.map((post, i) => ( 
+                <Card key={i}>
+                 <Row style={{
+                        border: '1px solid black',
+                        width: '80%',
+                        marginLeft: '10%',
+                        marginRight: '10%'
+                    }}>
+                    <Col>{post.name}</Col>
+                    <Col>{post.description}</Col>
+                    <Col>{post.img_url}</Col>
+                    <Col>{post.priority}</Col>
+                 </Row>
+                 </Card>))}
                 
             </Card>
             </Container>
