@@ -2,7 +2,7 @@ import Client from "./Axios";
 
 export const GetPosts = async () => {
     try{
-        const res = await Client.get('posts')
+        const res = await Client.get('posts/')
         // console.log(res)
         return res.data
     }catch(err){throw err}

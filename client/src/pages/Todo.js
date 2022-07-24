@@ -30,11 +30,11 @@ const Todo = (props) => {
             setCreate(true)
         }
     }
-    // useEffect(() => {
-    //     const data = GetPosts()
-    //     setPosts(data)
-    // },[])
-    console.log(props, "POSTS")
+    useEffect(() => {
+        const data = GetPosts()
+        setPosts(data)
+    },[])
+    console.log(posts, "POSTS")
     if(!create){
         return(
             <Container fluid>
@@ -42,7 +42,11 @@ const Todo = (props) => {
                 <CardHeader>
                     <Button onClick={(e) => handleCre(e)}>Add To List</Button>
                 </CardHeader>
-                <Row>Hey Bud Todos Here</Row>
+                {/* {posts.map((post) => ( 
+                 <Row>Posts</Row>
+                 
+                ))} */}
+                
             </Card>
             </Container>
 

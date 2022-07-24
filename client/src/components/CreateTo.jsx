@@ -37,7 +37,7 @@ const CreateTo = (props) => {
         e.preventDefault()
         if(props.user){
         await CreatePost(newPost)
-        // n('/todo')
+        n('/todo')
         }else{
             alert("User is Undefined")
         }
