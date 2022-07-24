@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LoginContext } from '../LoginContext'
+import { Card } from 'react-bootstrap'
 import Client from '../services/Axios'
 
 const Login = () => {
@@ -36,19 +37,20 @@ const Login = () => {
     }
     
     return(
-        <div>
+        <Card style={{width:'60%', marginLeft:'20%', marginRight:'20%', padding: '5%', marginTop: '10%'}}>
             <form onSubmit={handleSubmit}>
-                Username: <input type='text' name='username' placeholder='Username'
-                    value={login.username} onChange={handleChange} />
-                Password: <input type='password' name='password' placeholder='Password'
+                <input type='text' name='username' placeholder='Username' style={{
+
+                    }} value={login.username} onChange={handleChange} /><br></br>
+                <input type='password' name='password' placeholder='Password'
                     value={login.password} onChange={handleChange} />
-                <button type='submit'>Login</button>
+                <button className='btn btn-outline-dark' type='submit'>Login</button>
             </form>
             <div className='form-footer'>
-                 <p>Don't have an account yet?</p> 
-                 <a href='/register/'>Register</a>
+                 <p>Don't have an account yet?<a href='/register'>Click Here</a> to Register.</p> 
+                 
             </div>
-        </div>
+        </Card>
     )
 }
 

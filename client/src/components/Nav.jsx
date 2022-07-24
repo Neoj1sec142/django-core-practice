@@ -1,6 +1,6 @@
 import { useNavigate, Link } from 'react-router-dom'
 import React from "react";
-import Logout from './Logout'
+// import Logout from './Logout'
 // import "../styles/App.css";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -48,34 +48,19 @@ const NavDrop = ({ loginStatus, user }) => {
   }
 
   const publicOptions = (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/register">Register</Link>
-      <Link to="/login">Sign In</Link>
-    </nav>
-    
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{justifyContent: 'space-evenly'}}>
+      <Navbar.Brand onClick={() => navigate('/login')}>Dashboard</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav" style={{justifyContent: 'space-between'}}>
+        <Nav className="mr-auto">
+          <Nav.Link href='/'>Home</Nav.Link>
+          <Nav.Link href='/register'>Register</Nav.Link>
+          <Nav.Link href='/login'>Login</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   )
-
-  // console.log(user, "LOGIN")
-  return (
-    <header className='master-header'>
-      {/* <Link to="/">
-        <div className="logo-wrapper" alt="logo">
-          <img
-            className="logo"
-            src="https://avatars.dicebear.com/api/jdenticon/app.svg"
-            alt="welcome banner"
-          />
-        </div>
-      </Link> */}
-      {/* <div className="Mere-header" onClick={() => {
-          (authenticated && user ? navigate('/home') : navigate('/signin'))}}>
-           
-        </div> */}
-        {/* {publicOptions} */}
-      {loginStatus ? authenticatedOptions : publicOptions}
-    </header>
-  )
+  return (<header className='master-header'>{loginStatus ? authenticatedOptions : publicOptions}</header>)
 }
 
 export default NavDrop
