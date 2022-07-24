@@ -1,5 +1,6 @@
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
+from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.shortcuts import render
@@ -63,29 +64,31 @@ class UserAllDetailsDetail(generics.RetrieveUpdateDestroyAPIView):
 # class LanguageDetail(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Language.objects.all()
 #     serializer_class = LanguageSerializer
-class PostList(APIView):
+class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (permissions.AllowAny,)
-
-
-class PostListNew(generics.CreateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    # permission_classes = (permissions.AllowAny,)
-
-    def post(self, request, format=json):
-        if request.method == "POST":
-            new_data = request.data
-            user = User.objects.get(id=request.data['user_id'])
-            new_data['user_id']=user
-            serializer = PostSerializer(data=new_data)
-            if serializer.is_valid():
-                post = serializer.save()
-                if post:
-                    snp = serializer.data
-                return Response(snp, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    class Meta:
+        model = Post
+        fields = ('__all__')
+# class PostListNew(generics.CreateAPIView):
+#     queryset = Post.objects.all()
+#     serializer_class = PostSerializer
+#     permission_classes = (permissions.AllowAny,)
+    
+    # def post(self, request, format=json):
+    #     if request.method == "POST":
+    #         new_data = request.data
+    #         user = User.objects.get(id=request.data['user_id'])
+    #         new_data['user_id']=user
+    #         serializer = PostSerializer(data=new_data)
+    #         if serializer.is_valid():
+    #             post = serializer.save()
+    #             if post:
+    #                 snp = serializer.data
+    #             return Response(snp, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # def get(self, request, format=json):
     #     if request.method == "GET":
