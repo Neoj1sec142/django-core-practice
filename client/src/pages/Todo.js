@@ -38,7 +38,8 @@ const Todo = (props) => {
         fetchData()
         .catch(err => console.error(err, 'ERR TODO'))
     },[])
-    console.log(posts, "POSTS")
+    const sorted = posts.sort((a,b) => Number(a.date_created) - Number(b.date_created))
+    console.log(sorted, "POSTS")
     if(!create){
         return(
             <Container fluid>

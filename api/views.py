@@ -57,43 +57,18 @@ class UserAllDetailsDetail(generics.RetrieveUpdateDestroyAPIView):
   queryset = User.objects.all()
   serializer_class = UserAllDetailsSerializer
 
-# class LanguageList(generics.ListCreateAPIView):
-#     queryset = Language.objects.all()
-#     serializer_class = LanguageSerializer
 
-# class LanguageDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Language.objects.all()
-#     serializer_class = LanguageSerializer
 class PostList(generics.ListCreateAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-date_created')
     serializer_class = PostSerializer
     permission_classes = (permissions.AllowAny,)
     
     class Meta:
         model = Post
         fields = ('__all__')
-# class PostListNew(generics.CreateAPIView):
-#     queryset = Post.objects.all()
-#     serializer_class = PostSerializer
-#     permission_classes = (permissions.AllowAny,)
-    
-    # def post(self, request, format=json):
-    #     if request.method == "POST":
-    #         new_data = request.data
-    #         user = User.objects.get(id=request.data['user_id'])
-    #         new_data['user_id']=user
-    #         serializer = PostSerializer(data=new_data)
-    #         if serializer.is_valid():
-    #             post = serializer.save()
-    #             if post:
-    #                 snp = serializer.data
-    #             return Response(snp, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        ordering = ('-date_created')
+        
 
-    # def get(self, request, format=json):
-    #     if request.method == "GET":
-    #         queryset = Post.objects.all()
-    #         return Response(queryset)
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()

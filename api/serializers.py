@@ -47,16 +47,12 @@ class PostSerializer(serializers.ModelSerializer):
         queryset=User.objects.all(),
         source='user'
     )
-    # languages = LanguageSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Post
         fields = '__all__'
         extra_fields = ('users')
-    # def create(self, validated_data):
-    #     instance = self.Meta.model(**validated_data)
-    #     if instance.is_valid():
-    #         instance.save()
-    #         return instance
+        ordering = ('-date_created')
     
 
 class CommentSerializer(serializers.ModelSerializer):
